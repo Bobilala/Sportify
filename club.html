@@ -14,6 +14,7 @@
   <!-- Bootstrap v4.3.1 CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/theme.css">
@@ -37,82 +38,23 @@
       height: 63px;
     }
 
-    ._flexible div input {
-      border: solid rgb(255, 217, 0);
-    }
-
-    ._available {
+    .club {
+      width: 250px;
+      display: inline-block;
       background-color: rgb(0, 164, 239);
       border: none;
     }
 
-    ._unavailable {
-      background-color: rgb(255, 162, 149);
-      pointer-events: none;
-      border: none;
-    }
-
-    ._unready {
-      background-color: rgb(120, 120, 120);
-      pointer-events: none;
-    }
-
-    .green {
-      width: 45px;
-      height: 18px;
-      background-color: rgb(119, 179, 134);
-      margin: 1px;
-    }
-
-    .red {
-      width: 45px;
-      height: 18px;
-      background-color: rgb(255, 162, 149);
-      margin: 1px;
-    }
-
-    .gray {
-      width: 45px;
-      height: 18px;
-      background-color: rgb(120, 120, 120);
-      margin: 1px;
-    }
-
-    .flex {
-      width: 45px;
-      height: 18px;
-      border: 3px solid rgb(255, 217, 0);
-      margin: 1px;
-    }
-
-    td {
-      width: 50px;
-      height: 20px;
-      vertical-align: middle;
+    .clublabel {
       font-size: 80%;
-      margin-left: 5px;
-    }
-
-    div input {
-      outline: none;
-      vertical-align: middle;
-    }
-    .td_left {
-      width: 150px;
-      text-align: left;
-      height: 40px;
-
-    }
-
-    .td_right {
-      padding-right: 3px;
+      text-align: center;
 
     }
   </style>
   <script>
     var lastselected;
     function selectspace(element) {
-      if (element.className.indexOf("_available") > -1) {
+      if (element.className.indexOf("club") > -1) {
         document.getElementById(lastselected).style.color = "black";
         document.getElementById(lastselected).style.border = "";
         document.getElementById(lastselected).style.fontWeight = 'normal';
@@ -143,68 +85,6 @@
     }
 
 
-
-
-  /*  function init() {
-      document.getElementById("currentusername").innerHTML = sessionStorage.getItem('username');
-      if (sessionStorage.getItem("arrivetime") && sessionStorage.getItem("duration") && sessionStorage.getItem("myparkplace")) {
-        let myparkplace = sessionStorage.getItem('myparkplace')
-        document.getElementById("myparkplace").innerHTML = "Selected parking spaces: " + myparkplace;
-        let st = sessionStorage.getItem("arrivetime");
-        let du = sessionStorage.getItem("duration");
-        document.getElementById("departuretime").innerHTML = dateToString(new Date(parseInt(st) + parseInt(du) * 3600 * 1000))
-        if (myparkplace == 'A9') {
-          showBlocked(true, true)
-        } else if (myparkplace == 'A10') {
-          showBlocked(false, true)
-        } else {
-          showBlocked(false, false)
-        }
-      } else {
-        showBlocked(false, false)
-      }
-    }*/
-   
-    function call(name) {
-      alert("We will help to contact the owner of  " + name)
-    }
-    //获取系统时间
-    function showTime() {
-      //文字增加空格
-      document.getElementById("nowtime").style = "white-space:pre;";
-      //显示时间
-      document.getElementById("nowtime").innerText = dateToString(new Date());
-    }
-    setInterval("showTime()", 1000);
-    function dateToString(time) {
-      year = time.getFullYear();//年
-      month = time.getMonth() + 1;//月
-      day = time.getDate();//日
-      hour = time.getHours();//时
-      minutes = time.getMinutes();//分
-      seconds = time.getSeconds();//秒
-      return year + "." + p(month) + "." + p(day) + " " + p(hour) + ":" + p(minutes) + ":" + p(seconds)
-    }
-    //月日时分秒小于10补0
-    function p(s) { return s < 10 ? '0' + s : s; }
-
-    function leave() {
-      sessionStorage.removeItem('arrivetime')
-      sessionStorage.removeItem('duration')
-      sessionStorage.removeItem('myparkplace')
-    }
-
-
-    function showBlocked(_status1, _status2) {
-      if (!_status1) {
-        let lab = document.getElementById('status1');
-        lab.parentNode.removeChild(lab)
-      }
-      if (!_status2) {
-        let lab = document.getElementById('status2');
-        lab.parentNode.removeChild(lab)
-      }
-    }
   </script>
 </head>
 
@@ -271,8 +151,8 @@
       <li class="right-menu-item">
         <a href="#">
           <i class="fas fa-envelope"></i>
-          <div class="ntitle">Your vehicle is blocked</div>
-          <div class="desc"> It will leave 5h later</div>
+          <div class="ntitle">Your activity has been scheduled</div>
+          <div class="desc"> It will start 5h later</div>
         </a>
       </li>
     </ul>
@@ -312,28 +192,44 @@
               <div class="layout" style="margin-top: 20px;">
                 <span style="width: 250px;display:inline-block;" class="horzontal">
                   <div>
-                    <button style="width: 250px;display:inline-block;" id="A1" onclick="selectspace(this)" class="_available">羽你同行<br><div style="font-size: 80%; text-align:left;">|badminton |hiking |camping</div></button>
+                    <button class="club" id="A1" onclick="selectspace(this)">羽你同行<br>
+                      <div class="clublabel">|badminton |hiking |camping</div>
+                    </button>
                   </div>
                   <div>
-                    <button style="width: 250px;display:inline-block;" id="A2" onclick="selectspace(this)" class="_available">Crossover<br><div style="font-size: 80%; text-align:left;">|basketball |girls</div></button>
+                    <button class="club" id="A2" onclick="selectspace(this)">Crossover<br>
+                      <div class="clublabel">|basketball |girls</div>
+                    </button>
                   </div>
                   <div>
-                    <button style="width: 250px;display:inline-block;" id="A3" onclick="selectspace(this)" class="_available">零封<br><div style="font-size: 80%; text-align:left;">|Ping-pong</div></button>
+                    <button class="club" id="A3" onclick="selectspace(this)">零封<br>
+                      <div class="clublabel">|Ping-pong</div>
+                    </button>
                   </div>
                   <div>
-                    <button style="width: 250px;display:inline-block;" id="A4" onclick="selectspace(this)" class="_available">POP Club<br><div style="font-size: 80%; text-align:left;">|volleyball</div></button>
+                    <button class="club" id="A4" onclick="selectspace(this)">POP Club<br>
+                      <div class="clublabel">|volleyball</div>
+                    </button>
                   </div>
                   <div>
-                    <button style="width: 250px;display:inline-block;" id="A5" onclick="selectspace(this)" class="_available">Fitness<br><div style="font-size: 80%; text-align:left;">|dance |yoga</div></button>
+                    <button class="club" id="A5" onclick="selectspace(this)">Fitness<br>
+                      <div class="clublabel">|dance |yoga</div>
+                    </button>
                   </div>
                   <div>
-                    <button style="width: 250px;display:inline-block;" id="A6" onclick="selectspace(this)" class="_available">不是哥们儿<br><div style="font-size: 80%; text-align:left;">|football |frisbee |boys</div></button>
+                    <button class="club" id="A6" onclick="selectspace(this)">不是哥们儿<br>
+                      <div class="clublabel">|football |frisbee |boys</div>
+                    </button>
                   </div>
                   <div>
-                    <button style="width: 250px;display:inline-block;" id="A7" onclick="selectspace(this)" class="_available">氧乐多<br><div style="font-size: 80%; text-align:left;">|climb |running</div></button>
+                    <button class="club" id="A7" onclick="selectspace(this)">氧乐多<br>
+                      <div class="clublabel">|climb |running</div>
+                    </button>
                   </div>
                   <div>
-                    <button style="width: 250px;display:inline-block;" id="A8" onclick="selectspace(this)" class="_available">GOAT<br><div style="font-size: 80%; text-align:left;">|skiing |rugby</div></button>
+                    <button class="club" id="A8" onclick="selectspace(this)">GOAT<br>
+                      <div class="clublabel">|skiing |rugby</div>
+                    </button>
                   </div>
 
                 </span>
@@ -350,45 +246,45 @@
 
           </div>
         </div>
-  <!-- .Content  -->
-  <!-- Botom Panel  -->
-  <div class="bottom-panel">
-    <div class="bp-col">
-      <a href="join.html">
-        <div class="bp-icon"><img src="img/Join.png" alt="icon"> </div>
-        <div class="bp-text">Join</div>
-      </a>
-    </div>
-    <div class="bp-col">
-      <a href="create.html">
-        <div class="bp-icon"><img src="img/create.png" alt="icon"></div>
-        <div class="bp-text">Create</div>
-      </a>
-    </div>
-    <div class="bp-col">
-      <a href="club.html">
-        <div class="bp-icon"><img src="img/club.png" alt="icon"></div>
-        <div class="bp-text">Club</div>
-      </a>
-    </div>
-    <div class="bp-col">
-      <a href="setting.html">
-        <div class="bp-icon"><img src="img/ipaccount.png" alt="icon"></div>
-        <div class="bp-text">Account</div>
-      </a>
-    </div>
-  </div>
-  <!-- .Bottom Panel  -->
-  <div class="overlay"></div>
-  <!-- Optional JavaScript -->
-  <!-- jQuery v3.4.1 -->
-  <script src="https://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
-  <!--  Bootstrap v4.3.1 JS -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
-  <!--  Custom JS -->
-  <script src="js/theme.js"></script>
+        <!-- .Content  -->
+        <!-- Botom Panel  -->
+        <div class="bottom-panel">
+          <div class="bp-col">
+            <a href="join.html">
+              <div class="bp-icon"><img src="img/Join.png" alt="icon"> </div>
+              <div class="bp-text">Join</div>
+            </a>
+          </div>
+          <div class="bp-col">
+            <a href="create.html">
+              <div class="bp-icon"><img src="img/create.png" alt="icon"></div>
+              <div class="bp-text">Create</div>
+            </a>
+          </div>
+          <div class="bp-col">
+            <a href="club.html">
+              <div class="bp-icon"><img src="img/club.png" alt="icon"></div>
+              <div class="bp-text">Club</div>
+            </a>
+          </div>
+          <div class="bp-col">
+            <a href="setting.html">
+              <div class="bp-icon"><img src="img/ipaccount.png" alt="icon"></div>
+              <div class="bp-text">Account</div>
+            </a>
+          </div>
+        </div>
+        <!-- .Bottom Panel  -->
+        <div class="overlay"></div>
+        <!-- Optional JavaScript -->
+        <!-- jQuery v3.4.1 -->
+        <script src="https://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
+        <!--  Bootstrap v4.3.1 JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+          integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+          crossorigin="anonymous"></script>
+        <!--  Custom JS -->
+        <script src="js/theme.js"></script>
 </body>
 
 </html>

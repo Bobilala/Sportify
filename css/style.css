@@ -25,11 +25,8 @@ button{
   outline: none;
 }
 
-/* --------- button labels --------- */
-.button-value {
-	display: inline-block;
-	white-space: pre-line;
-}
+
+
 
 /* --------- tables --------- */
 .td_left{vertical-align:middle;}

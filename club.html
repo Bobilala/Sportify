@@ -51,44 +51,48 @@
 
     }
   </style>
-  <script>
-    var lastselected;
-    function selectspace(element) {
-      if (element.className.indexOf("club") > -1) {
-        document.getElementById(lastselected).style.color = "black";
-        document.getElementById(lastselected).style.border = "";
-        document.getElementById(lastselected).style.fontWeight = 'normal';
-        element.style.color = "#FFF";
-        element.style.border = "3px solid #063";
-        element.style.fontWeight = 'bold';
-        element.name = "place";
-        lastselected = element.id;
-      }
-    }
+  <script src="js/club.js">
 
-    function show() {
-      alert("Successfully reserved: " + lastselected.toUpperCase());
-    }
-    function init() {
-      document.getElementById("currentusername").innerHTML = sessionStorage.getItem('username');
-      lastselected = "A1";
-      document.getElementById(lastselected).style.color = "#FFF";
-      document.getElementById(lastselected).style.border = "3px solid #063";
-      document.getElementById(lastselected).style.fontWeight = 'bold';
-    }
-    function reserve() {
-      alert("successful reserved: " + lastselected);
-      sessionStorage.removeItem('estimatedduration')
-      let now = new Date().getTime()
-      sessionStorage.setItem('estimatedarrivetime', now + 600 * 1000)
-      sessionStorage.setItem('reservedparkplace', lastselected)
-    }
+
+
+
+    // var lastselected;
+    // function selectspace(element) {
+    //   if (element.className.indexOf("club") > -1) {
+    //     document.getElementById(lastselected).style.color = "black";
+    //     document.getElementById(lastselected).style.border = "";
+    //     document.getElementById(lastselected).style.fontWeight = 'normal';
+    //     element.style.color = "#FFF";
+    //     element.style.border = "3px solid #063";
+    //     element.style.fontWeight = 'bold';
+    //     element.name = "place";
+    //     lastselected = element.id;
+    //   }
+    // }
+
+    // function show() {
+    //   alert("Successfully reserved: " + lastselected.toUpperCase());
+    // }
+    // function init() {
+    //   document.getElementById("currentusername").innerHTML = sessionStorage.getItem('username');
+    //   lastselected = "A1";
+    //   document.getElementById(lastselected).style.color = "#FFF";
+    //   document.getElementById(lastselected).style.border = "3px solid #063";
+    //   document.getElementById(lastselected).style.fontWeight = 'bold';
+    // }
+    // function reserve() {
+    //   alert("successful reserved: " + lastselected);
+    //   sessionStorage.removeItem('estimatedduration')
+    //   let now = new Date().getTime()
+    //   sessionStorage.setItem('estimatedarrivetime', now + 600 * 1000)
+    //   sessionStorage.setItem('reservedparkplace', lastselected)
+    // }
 
 
   </script>
 </head>
 
-<body class="default" onload="init()">
+<body class="default">
   <!-- Preloading -->
   <div class="preloading">
     <div class="wrap-preload">
@@ -131,7 +135,7 @@
         <a href="create.html"><i class="fas fa-car"></i>Park</a>
       </li>-->
       <li>
-        <a href="club.html"><i class="fas fa-car"></i>Club</a>
+        <a href="myclubs.html"><i class="fas fa-car"></i>My Clubs</a>
       </li>
       <li>
         <a href="index.html"><i class="fas fa-map"></i>Logout</a>
@@ -192,51 +196,52 @@
               <div class="layout" style="margin-top: 20px;">
                 <span style="width: 250px;display:inline-block;" class="horzontal">
                   <div>
-                    <button class="club" id="A1" onclick="selectspace(this)">羽你同行<br>
+                    <button class="club" id="羽你同行" onclick="selectspace(this)">羽你同行<br>
                       <div class="clublabel">|badminton |hiking |camping</div>
                     </button>
                   </div>
                   <div>
-                    <button class="club" id="A2" onclick="selectspace(this)">Crossover<br>
+                    <button class="club" id="Crossover" onclick="selectspace(this)">Crossover<br>
                       <div class="clublabel">|basketball |girls</div>
                     </button>
                   </div>
                   <div>
-                    <button class="club" id="A3" onclick="selectspace(this)">零封<br>
+                    <button class="club" id="零封" onclick="selectspace(this)">零封<br>
                       <div class="clublabel">|Ping-pong</div>
                     </button>
                   </div>
                   <div>
-                    <button class="club" id="A4" onclick="selectspace(this)">POP Club<br>
+                    <button class="club" id="POP Club" onclick="selectspace(this)">POP Club<br>
                       <div class="clublabel">|volleyball</div>
                     </button>
                   </div>
                   <div>
-                    <button class="club" id="A5" onclick="selectspace(this)">Fitness<br>
+                    <button class="club" id="Fitness" onclick="selectspace(this)">Fitness<br>
                       <div class="clublabel">|dance |yoga</div>
                     </button>
                   </div>
                   <div>
-                    <button class="club" id="A6" onclick="selectspace(this)">不是哥们儿<br>
+                    <button class="club" id="不是哥们儿" onclick="selectspace(this)">不是哥们儿<br>
                       <div class="clublabel">|football |frisbee |boys</div>
                     </button>
                   </div>
                   <div>
-                    <button class="club" id="A7" onclick="selectspace(this)">氧乐多<br>
+                    <button class="club" id="氧乐多" onclick="selectspace(this)">氧乐多<br>
                       <div class="clublabel">|climb |running</div>
                     </button>
                   </div>
                   <div>
-                    <button class="club" id="A8" onclick="selectspace(this)">GOAT<br>
+                    <button class="club" id="GOAT" onclick="selectspace(this)">GOAT<br>
                       <div class="clublabel">|skiing |rugby</div>
                     </button>
                   </div>
+
 
                 </span>
               </div>
               <br>
               <div>
-                <a href="myclub.html">
+                <a href="myclubs.html">
                   <button class="theme-button mcbutton" onclick="reserve()" style="display: block; margin:auto;">
                     Join it Now!
                   </button>
@@ -285,6 +290,8 @@
           crossorigin="anonymous"></script>
         <!--  Custom JS -->
         <script src="js/theme.js"></script>
+        <script src="js/club.js"></script>
+
 </body>
 
 </html>

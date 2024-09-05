@@ -101,7 +101,43 @@
     }
   </style>
   <script>
+    // var lastselected;
+    // function selectspace(element) {
+    //   if (element.className.indexOf("_available") > -1) {
+    //     document.getElementById(lastselected).style.color = "black";
+    //     document.getElementById(lastselected).style.border = "";
+    //     document.getElementById(lastselected).style.fontWeight = 'normal';
+    //     element.style.color = "#FFF";
+    //     element.style.border = "3px solid #063";
+    //     element.style.fontWeight = 'bold';
+    //     element.name = "place";
+    //     lastselected = element.id;
+    //   }
+
+    // }
+    // function show() {
+    //   alert("Successfully reserved: " + lastselected.toUpperCase());
+    // }
+    // function init() {
+    //   document.getElementById("currentusername").innerHTML = sessionStorage.getItem('username');
+    //   lastselected = "basketball";
+    //   document.getElementById(lastselected).style.color = "#FFF";
+    //   document.getElementById(lastselected).style.border = "3px solid #063";
+    //   document.getElementById(lastselected).style.fontWeight = 'bold';
+    // }
+    // function reserve() {
+    //   alert("successful reserved: " + lastselected);
+    //   sessionStorage.removeItem('estimatedduration')
+    //   let now = new Date().getTime()
+    //   sessionStorage.setItem('estimatedarrivetime', now + 600 * 1000)
+    //   sessionStorage.setItem('reservedparkplace', lastselected)
+    // }
+
+
+
     var lastselected;
+
+
     function selectspace(element) {
       if (element.className.indexOf("_available") > -1) {
         document.getElementById(lastselected).style.color = "black";
@@ -113,25 +149,81 @@
         element.name = "place";
         lastselected = element.id;
       }
-
     }
+
     function show() {
       alert("Successfully reserved: " + lastselected.toUpperCase());
     }
+
     function init() {
-      document.getElementById("currentusername").innerHTML = sessionStorage.getItem('username');
+      //document.getElementById("currentusername").innerHTML = sessionStorage.getItem('username');
       lastselected = "basketball";
       document.getElementById(lastselected).style.color = "#FFF";
       document.getElementById(lastselected).style.border = "3px solid #063";
       document.getElementById(lastselected).style.fontWeight = 'bold';
+      myActivities = localStorage.getItem('myActivities');
+      myActivities = myActivities ? JSON.parse(myActivities) : [];
     }
+
+
+
+    function addToMyActivities(item) {
+      // Get the current list of activities from local storage
+      let myActivities = localStorage.getItem('myActivities');
+      myActivities = myActivities ? JSON.parse(myActivities) : [];
+
+      // Add the new item to the list
+      myActivities.push(item);
+
+      // Save the updated list to local storage
+      localStorage.setItem('myActivities', JSON.stringify(myActivities));
+      alert("Successfully reserved: " + localStorage.getItem('myActivities'));
+
+      // Redirect to the My Activities page
+      window.location.href = 'myactivities.html';
+
+    }
+
     function reserve() {
-      alert("successful reserved: " + lastselected);
-      sessionStorage.removeItem('estimatedduration')
-      let now = new Date().getTime()
-      sessionStorage.setItem('estimatedarrivetime', now + 600 * 1000)
-      sessionStorage.setItem('reservedparkplace', lastselected)
+      var selectedItem = lastselected;
+      addToMyActivities(selectedItem);
+      alert("Successfully reserved: " + selectedItem);
+      sessionStorage.removeItem('estimatedduration');
+      let now = new Date().getTime();
+      sessionStorage.setItem('estimatedarrivetime', now + 600 * 1000);
+      sessionStorage.setItem('reservedparkplace', selectedItem);
+      //window.location.href = 'myactivities.html';
     }
+
+
+
+    window.onload = function () {
+      init();
+      // localStorage.clear();
+
+      // Get the container element to display the activities
+      var myActivitiesList = document.getElementById('myActivitiesList');
+
+      // Get the list of activities from localStorage
+      var myActivities = localStorage.getItem('myActivities');
+      myActivities = myActivities ? JSON.parse(myActivities) : [];
+
+
+      // Loop through the activities and create checkboxes
+      myActivities.forEach(function (activities) {
+        var checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = activity;
+        myActivitiesList.appendChild(checkbox);
+
+        var label = document.createElement('label');
+        label.textContent = activity;
+        myActivitiesList.appendChild(label);
+
+        var lineBreak = document.createElement('br');
+        myActivitiesList.appendChild(lineBreak);
+      });
+    };
   </script>
 </head>
 
@@ -178,7 +270,7 @@
         <a href="create.html"><i class="fas fa-car"></i>Park</a>
       </li>-->
       <li>
-        <a href="club.html"><i class="fas fa-car"></i>Club</a>
+        <a href="myclubs.html"><i class="fas fa-car"></i>My Clubs</a>
       </li>
       <li>
         <a href="index.html"><i class="fas fa-map"></i>Logout</a>
@@ -300,34 +392,7 @@
                   </div>
 
                 </span>
-                <!--<span style="width: 40px;display: inline-block; float:right;" class="vertical">
-                  <div>
-                    <input type="button" id="A9" onclick="selectspace(this)" class="_available" value="A9"></input>
-                  </div>
-                  <div>
-                    <input type="button" id="A10" onclick="selectspace(this)" class="_available" value="A10"></input>
-                  </div>
-                  <div>
-                    <input type="button" id="A11" onclick="selectspace(this)" class="_unavailable" value="A11"></input>
-                  </div>
-                  <div>
-                    <input type="button" id="A12" onclick="selectspace(this)" class="_unavailable" value="A12"></input>
-                  </div>
-                </span>
-                <span style="width: 40px;display: inline-block; float:right;" class="vertical flexible">
-                  <div>
-                    <input type="button" id="A13" onclick="selectspace(this)" class="_unready" value="A13"></input>
-                  </div>
-                  <div>
-                    <input type="button" id="A14" onclick="selectspace(this)" class="_unready" value="A14"></input>
-                  </div>
-                  <div>
-                    <input type="button" id="A15" onclick="selectspace(this)" class="_unavailable" value="A15"></input>
-                  </div>
-                  <div>
-                    <input type="button" id="A16" onclick="selectspace(this)" class="_available" value="A16"></input>
-                  </div>
-                </span>-->
+
               </div>
               <br>
               <div>
@@ -380,6 +445,8 @@
           crossorigin="anonymous"></script>
         <!--  Custom JS -->
         <script src="js/theme.js"></script>
+        <script src="js/script.js"></script>
+
 </body>
 
 </html>

@@ -1,4 +1,0 @@
-{
-    "appService.defaultWebAppToDeploy": "/subscriptions/b3876bf2-62ef-4f4d-8341-452bc7a43b1f/resourceGroups/suyu-config/providers/Microsoft.Web/sites/suyutestapp",
-    "appService.deploySubpath": "."
-}
